@@ -18,16 +18,22 @@ O projeto já possui implementação existente. Siga estas regras:
 
 ## Ordem de trabalho incremental
 1. `dotnet test` → confirmar baseline verde
-2. Ler CHANGELOG.md `[Unreleased]`
-3. Escrever os novos testes
-4. Implementar até os novos testes passarem
-5. `dotnet test` → confirmar que tudo ainda passa
+2. `git checkout codex` -> trabalhar sempre na branch codex, criar caso necessário
+3. Ler CHANGELOG.md `[Unreleased]`
+4. Escrever os novos testes
+5. Implementar até os novos testes passarem
+6. `dotnet test` → confirmar que tudo ainda passa
+7. `docker compose` -> subir docker e validar disponibilidade
+8. `git add` -> adicionar alterações no git
+9. `git commit -m` -> ser sucinto e objetivo no commit
+10. Criar pull request com a master
 
 ## Restrições
 - Não usar banco de dados
 - Não adicionar dependências além das necessárias
 - Não implementar endpoints não descritos na SPEC
 - Todo erro deve seguir o schema Erro da SPEC
+- Nunca commitar arquivos de env. nem credenciais ou dados sensíveis. Caso encontre solicite permissão
 
 ## Estrutura esperada
 CepApi/
