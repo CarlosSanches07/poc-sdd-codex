@@ -64,6 +64,7 @@ GET /endereco/{cep}
 6. ViaCEP não responde em 1 segundo → 502 SERVICO_INDISPONIVEL
    - O HttpClient deve ter timeout configurado para 1000ms
    - Timeout deve ser tratado como SERVICO_INDISPONIVEL
+7. O Serviço deve validar uma arquivo estático chamado blackList.json -> 400 CEP EM BLACKLIST
 
 ## Regras de implementação
 
