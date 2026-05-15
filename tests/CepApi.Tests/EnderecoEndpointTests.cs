@@ -81,6 +81,24 @@ public sealed class EnderecoEndpointTests
     }
 
     [Fact]
+    public async Task GetEndereco_ComCepEmWhitelist_RetornaEnderecoPadraoSemChamarViaCep()
+    {
+        var chamadasViaCep = 0;
+        using var factory = CreateFactory((_, _) =>
+        {
+            chamadasViaCep++;
+            return Task.FromResult<Endereco?>(null);
+        });
+
+        var response = await factory.CreateClient().GetAsync("/endereco/66666666");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var endereco = await response.Content.ReadFromJsonAsync<Endereco>();
+        Assert.Equal(new Endereco("66666666", "Rua Dale", "Dale", "Dale", "TT"), endereco);
+        Assert.Equal(0, chamadasViaCep);
+    }
+
+    [Fact]
     public async Task GetEndereco_ComViaCepIndisponivel_RetornaServicoIndisponivel()
     {
         using var factory = CreateFactory((_, _) => throw new ViaCepUnavailableException());
