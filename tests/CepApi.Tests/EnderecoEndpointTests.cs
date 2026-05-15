@@ -63,6 +63,24 @@ public sealed class EnderecoEndpointTests
     }
 
     [Fact]
+    public async Task GetEndereco_ComCepEmBlacklist_RetornaCepEmBlacklistSemChamarViaCep()
+    {
+        var chamadasViaCep = 0;
+        using var factory = CreateFactory((_, _) =>
+        {
+            chamadasViaCep++;
+            return Task.FromResult<Endereco?>(null);
+        });
+
+        var response = await factory.CreateClient().GetAsync("/endereco/08345010");
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        var erro = await response.Content.ReadFromJsonAsync<Erro>();
+        Assert.Equal(new Erro("CEP_EM_BLACKLIST", "CEP em blacklist"), erro);
+        Assert.Equal(0, chamadasViaCep);
+    }
+
+    [Fact]
     public async Task GetEndereco_ComViaCepIndisponivel_RetornaServicoIndisponivel()
     {
         using var factory = CreateFactory((_, _) => throw new ViaCepUnavailableException());

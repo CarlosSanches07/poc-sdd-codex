@@ -25,6 +25,13 @@ public sealed class ErrorHandlingMiddleware(RequestDelegate next)
                 StatusCodes.Status404NotFound,
                 new Erro("CEP_NAO_ENCONTRADO", "CEP não encontrado"));
         }
+        catch (CepBlacklistedException)
+        {
+            await WriteErrorAsync(
+                context,
+                StatusCodes.Status400BadRequest,
+                new Erro("CEP_EM_BLACKLIST", "CEP em blacklist"));
+        }
         catch (ViaCepUnavailableException)
         {
             await WriteErrorAsync(
