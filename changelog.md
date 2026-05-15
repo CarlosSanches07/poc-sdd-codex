@@ -35,13 +35,14 @@
 - Não alterar nenhum teste que esteja fora do caso do uso 5
 
 
-## [Unreleased] incremento
+## incremento anterior
 
 ### Alterado
 
-**Caso de uso 7 - Implementar teste para o caso de uso e criar arquivo blackList.json com o CEP 08345010
+**Caso de uso 8 - implmentar teste e arquivo de withelist caso não exista
+**O cep na whitelist deve ser 66666666
 
 ### Não alterar
-- Casos de usos diferente de 7 - já estão corretos
+- Casos de usos diferente de 8  - já estão corretos
 - Controllers, Models - não refatorar
-- Não alterar nenhum teste que esteja fora do caso do uso 7
+- Não alterar nenhum teste que esteja fora do caso do uso 8
