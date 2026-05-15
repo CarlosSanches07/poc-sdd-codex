@@ -65,6 +65,9 @@ GET /endereco/{cep}
    - O HttpClient deve ter timeout configurado para 1000ms
    - Timeout deve ser tratado como SERVICO_INDISPONIVEL
 7. O Serviço deve validar uma arquivo estático chamado blackList.json -> 400 CEP EM BLACKLIST
+8. o Serviço deve mockar um resultado padrão para CEPs que estõa no arquivo estático whiteList.json
+  - O resultado padrão deve ser no modelo de response com os dados: CEP: 66666666, Endereço: Rua Dale, Numero 66, UF: TT, Cidade: Dale
+  - Invente o que faltar
 
 ## Regras de implementação
 
