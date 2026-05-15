@@ -45,15 +45,21 @@ public sealed class EnderecoEndpointTests
     }
 
     [Fact]
-    public async Task GetEndereco_ComCepNaoExistente_RetornaNaoEncontrado()
+    public async Task GetEndereco_ComCepNaoExistente_RetornaNaoEncontradoSemChamarViaCep()
     {
-        using var factory = CreateFactory((_, _) => Task.FromResult<Endereco?>(null));
+        var chamadasViaCep = 0;
+        using var factory = CreateFactory((_, _) =>
+        {
+            chamadasViaCep++;
+            return Task.FromResult<Endereco?>(null);
+        });
 
         var response = await factory.CreateClient().GetAsync("/endereco/00000000");
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         var erro = await response.Content.ReadFromJsonAsync<Erro>();
         Assert.Equal("CEP_NAO_ENCONTRADO", erro?.Codigo);
+        Assert.Equal(0, chamadasViaCep);
     }
 
     [Fact]

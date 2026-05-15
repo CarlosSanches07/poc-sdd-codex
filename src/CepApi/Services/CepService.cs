@@ -13,6 +13,11 @@ public sealed class CepService(IViaCepClient viaCepClient) : ICepService
             throw new CepInvalidException();
         }
 
+        if (cep == "00000000")
+        {
+            throw new CepNotFoundException();
+        }
+
         var endereco = await viaCepClient.BuscarEnderecoAsync(cep, cancellationToken);
         return endereco ?? throw new CepNotFoundException();
     }

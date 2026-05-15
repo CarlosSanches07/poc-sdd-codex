@@ -1,7 +1,9 @@
 using System.Net;
 using System.Text;
 using CepApi.Exceptions;
+using CepApi.Interfaces;
 using CepApi.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace CepApi.Tests;
@@ -50,13 +52,24 @@ public sealed class ViaCepClientTests
     }
 
     [Fact]
-    public async Task BuscarEnderecoAsync_ComStatusNaoSucesso_LancaServicoIndisponivel()
+    public async Task BuscarEnderecoAsync_ComTimeout_LancaServicoIndisponivel()
     {
-        using var httpClient = CreateHttpClient(new HttpResponseMessage(HttpStatusCode.BadGateway));
+        using var httpClient = CreateHttpClient(new HttpResponseMessage(HttpStatusCode.RequestTimeout));
         var client = new ViaCepClient(httpClient);
 
         await Assert.ThrowsAsync<ViaCepUnavailableException>(
             () => client.BuscarEnderecoAsync("85801000", CancellationToken.None));
+    }
+
+    [Fact]
+    public void Program_ConfiguraTimeoutDeUmSegundoNoHttpClientDoViaCep()
+    {
+        using var factory = new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory<Program>();
+        var httpClientFactory = factory.Services.GetRequiredService<IHttpClientFactory>();
+
+        using var httpClient = httpClientFactory.CreateClient(nameof(IViaCepClient));
+
+        Assert.Equal(TimeSpan.FromSeconds(1), httpClient.Timeout);
     }
 
     private static HttpClient CreateHttpClient(HttpResponseMessage response)

@@ -44,6 +44,10 @@ public sealed class ViaCepClient(HttpClient httpClient) : IViaCepClient
         {
             throw new ViaCepUnavailableException(exception);
         }
+        catch (TaskCanceledException exception)
+        {
+            throw new ViaCepUnavailableException(exception);
+        }
         catch (JsonException exception)
         {
             throw new ViaCepUnavailableException(exception);
