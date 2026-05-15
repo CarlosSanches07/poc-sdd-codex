@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] — incremento atual
+## incremento anterior
 
 ### Alterado
 
@@ -22,3 +22,14 @@
 - Casos de uso 1, 2, 3, 4, 7 — já implementados e com testes passando
 - Estrutura de Controllers, Models e Exceptions — não refatorar
 - Testes existentes dos casos acima — não remover nem modificar
+
+## [Unreleased] incremento atual
+
+### Alterado
+
+**Caso de uso 5 - Garantir retorno de CEP não encontrado o teste está validando somente chamadas ao VIACEP
+
+### Não alterar
+- Casos de usos diferente de 5 - já estão corretos
+- Controllers, Models, Exceptions e Interfaces - não refatorar
+- Não alterar nenhum teste que esteja fora do caso do uso 5
