@@ -26,7 +26,8 @@ O projeto já possui implementação existente. Siga estas regras:
 7. `docker compose` -> subir docker e validar disponibilidade
 8. `git add` -> adicionar alterações no git
 9. `git commit -m` -> ser sucinto e objetivo no commit
-10. Criar pull request com a master
+10. `git push origin codex` -> deve ser sempre na branch de trabalho codex
+11. Criar pull request com a master, caso não consiga envie o link para eu criar
 
 ## Restrições
 - Não usar banco de dados
