@@ -60,7 +60,10 @@ GET /endereco/{cep}
 3. CEP "123456789" (> 8 dígitos) → 400 CEP_INVALIDO
 4. CEP "8580100A" (contém letra) → 400 CEP_INVALIDO
 5. CEP "00000000" (não existe) → 404 CEP_NAO_ENCONTRADO
-6. ViaCEP indisponível → 502 SERVICO_INDISPONIVEL
+ - Early return: o ViaCEP não deve ser chamado
+6. ViaCEP não responde em 1 segundo → 502 SERVICO_INDISPONIVEL
+   - O HttpClient deve ter timeout configurado para 1000ms
+   - Timeout deve ser tratado como SERVICO_INDISPONIVEL
 
 ## Regras de implementação
 
