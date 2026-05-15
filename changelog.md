@@ -23,7 +23,7 @@
 - Estrutura de Controllers, Models e Exceptions — não refatorar
 - Testes existentes dos casos acima — não remover nem modificar
 
-## [Unreleased] incremento atual
+## incremento anterior
 
 ### Alterado
 
@@ -33,3 +33,15 @@
 - Casos de usos diferente de 5 - já estão corretos
 - Controllers, Models, Exceptions e Interfaces - não refatorar
 - Não alterar nenhum teste que esteja fora do caso do uso 5
+
+
+## [Unreleased] incremento
+
+### Alterado
+
+**Caso de uso 7 - Implementar teste para o caso de uso e criar arquivo blackList.json com o CEP 08345010
+
+### Não alterar
+- Casos de usos diferente de 7 - já estão corretos
+- Controllers, Models - não refatorar
+- Não alterar nenhum teste que esteja fora do caso do uso 7
